@@ -7,12 +7,12 @@ import blah/en/string as blah_string
 import blah/utils.{get_random_item, join}
 
 const email_domains = [
-  "gmail.com", "yahoo.com", "hotmail.com", "protonmail.com", "proton.me",
-  "aol.com", "ymail.com", "msn.com", "outlook.com", "mail.ru", "live.com",
+  "aol.com", "gmail.com", "hotmail.com", "live.com", "mail.ru", "msn.com", "outlook.com",
+  "proton.me", "protonmail.com", "yahoo.com", "ymail.com",
 ]
 
 const domain_suffixes = [
-  "com", "org", "net", "int", "edu", "gov", "mil", "io", "co",
+  "co", "com", "edu", "gov", "int", "io", "mil", "net", "org",
 ]
 
 const protocols = ["http", "https"]
