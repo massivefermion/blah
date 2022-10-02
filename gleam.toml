@@ -1,0 +1,15 @@
+name = "blah"
+version = "0.1.0"
+
+description = "random data generator for gleam"
+licences = ["Apache-2.0"]
+links = [
+  {title = "gleam", href = "https://gleam.run"},
+]
+repository = {type = "github", user = "massivefermion", repo = "blah"}
+
+[dependencies]
+gleam_stdlib = "~> 0.23"
+
+[dev-dependencies]
+gleeunit = "~> 0.6"
