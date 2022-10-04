@@ -10,8 +10,8 @@ pub fn country_code() {
   address.country_code()
 }
 
-pub fn coutry_code_alpha3() {
-  address.country_code_alpha3()
+pub fn alpha3_coutry_code() {
+  address.alpha3_country_code()
 }
 
 pub fn state() {

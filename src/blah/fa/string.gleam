@@ -62,12 +62,8 @@ pub fn pronounceable() {
 
   case nonce % 2 {
     0 -> {
-      assert Ok(first) =
-        starting_vowels
-        |> get_random_item
-      assert Ok(second) =
-        consonants
-        |> get_random_item
+      assert Ok(first) = get_random_item(starting_vowels)
+      assert Ok(second) = get_random_item(consonants)
       pronounceable_internal(
         string_builder.from_strings([first, second]),
         length - 2,
@@ -78,39 +74,23 @@ pub fn pronounceable() {
 }
 
 fn pronounceable_internal(state: StringBuilder, remaining: Int) -> String {
-  case remaining == 0 {
-    True ->
-      state
-      |> string_builder.to_string()
+  case remaining {
+    0 -> string_builder.to_string(state)
 
-    False -> {
+    _ -> {
       let nonce = int.random(4, 2048)
       let letters = case nonce % 2 {
         0 -> {
-          assert Ok(first) =
-            vowels
-            |> get_random_item
-          assert Ok(second) =
-            consonants
-            |> get_random_item
+          assert Ok(first) = get_random_item(vowels)
+          assert Ok(second) = get_random_item(consonants)
           [first, second]
-          |> list.map(fn(s) {
-            s
-            |> string_builder.from_string
-          })
+          |> list.map(string_builder.from_string)
         }
         1 -> {
-          assert Ok(first) =
-            consonants
-            |> get_random_item
-          assert Ok(second) =
-            vowels
-            |> get_random_item
+          assert Ok(first) = get_random_item(consonants)
+          assert Ok(second) = get_random_item(vowels)
           [first, second]
-          |> list.map(fn(s) {
-            s
-            |> string_builder.from_string
-          })
+          |> list.map(string_builder.from_string)
         }
       }
       pronounceable_internal(
@@ -123,49 +103,34 @@ fn pronounceable_internal(state: StringBuilder, remaining: Int) -> String {
 
 fn alpha_internal(state: StringBuilder, remaining: Int) -> String {
   case remaining == 0 {
-    True ->
-      state
-      |> string_builder.to_string()
+    True -> string_builder.to_string(state)
 
     False -> {
       assert Ok(letter) = get_random_item(letters)
-      alpha_internal(
-        state
-        |> string_builder.append(letter),
-        remaining - 1,
-      )
+      alpha_internal(string_builder.append(state, letter), remaining - 1)
     }
   }
 }
 
 fn numeric_internal(state: StringBuilder, remaining: Int) -> String {
   case remaining == 0 {
-    True ->
-      state
-      |> string_builder.to_string()
+    True -> string_builder.to_string(state)
 
     False -> {
       assert Ok(digit) = get_random_item(digits)
-      numeric_internal(
-        state
-        |> string_builder.append(digit),
-        remaining - 1,
-      )
+      numeric_internal(string_builder.append(state, digit), remaining - 1)
     }
   }
 }
 
 fn alphanumeric_internal(state: StringBuilder, remaining: Int) -> String {
   case remaining == 0 {
-    True ->
-      state
-      |> string_builder.to_string()
+    True -> string_builder.to_string(state)
 
     False -> {
       assert Ok(character) = get_random_item(characters)
       alphanumeric_internal(
-        state
-        |> string_builder.append(character),
+        string_builder.append(state, character),
         remaining - 1,
       )
     }
@@ -173,15 +138,9 @@ fn alphanumeric_internal(state: StringBuilder, remaining: Int) -> String {
 }
 
 fn with_pattern_internal(state: StringBuilder, given_pattern: String) -> String {
-  case
-    given_pattern
-    |> string.first()
-  {
+  case string.first(given_pattern) {
     Ok("%") -> {
-      assert Ok(to_append) = case
-        given_pattern
-        |> string.slice(0, 2)
-      {
+      assert Ok(to_append) = case string.slice(given_pattern, 0, 2) {
         "%d" -> get_random_item(digits)
         "%w" -> get_random_item(letters)
         "%c" -> get_random_item(characters)
@@ -189,23 +148,17 @@ fn with_pattern_internal(state: StringBuilder, given_pattern: String) -> String 
         characters -> Ok(characters)
       }
       with_pattern_internal(
-        state
-        |> string_builder.append(to_append),
-        given_pattern
-        |> string.drop_left(2),
+        string_builder.append(state, to_append),
+        string.drop_left(given_pattern, 2),
       )
     }
 
     Ok(to_append) ->
       with_pattern_internal(
-        state
-        |> string_builder.append(to_append),
-        given_pattern
-        |> string.drop_left(1),
+        string_builder.append(state, to_append),
+        string.drop_left(given_pattern, 1),
       )
 
-    Error(Nil) ->
-      state
-      |> string_builder.to_string()
+    Error(Nil) -> string_builder.to_string(state)
   }
 }

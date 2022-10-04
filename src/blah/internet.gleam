@@ -7,8 +7,8 @@ import blah/en/string as blah_string
 import blah/utils.{get_random_item, join}
 
 const email_domains = [
-  "aol.com", "gmail.com", "hotmail.com", "live.com", "mail.ru", "msn.com", "outlook.com",
-  "proton.me", "protonmail.com", "yahoo.com", "ymail.com",
+  "aol.com", "gmail.com", "hotmail.com", "live.com", "mail.ru", "msn.com",
+  "outlook.com", "proton.me", "protonmail.com", "yahoo.com", "ymail.com",
 ]
 
 const domain_suffixes = [
@@ -18,33 +18,35 @@ const domain_suffixes = [
 const protocols = ["http", "https"]
 
 pub fn username() {
-  let nonce = int.random(4, 2048)
+  let adjective = word.adjective()
+  let last_name = name.last_name()
 
+  let nonce = int.random(4, 2048)
   case nonce % 4 {
     0 ->
-      [word.adjective(), name.last_name()]
+      [adjective, last_name]
       |> join("")
 
     1 ->
       [
-        word.adjective(),
-        name.last_name()
+        adjective,
+        last_name
         |> string.lowercase(),
       ]
       |> join(".")
 
     2 ->
       [
-        word.adjective(),
-        name.last_name()
+        adjective,
+        last_name
         |> string.lowercase(),
       ]
       |> join("-")
 
     3 ->
       [
-        word.adjective(),
-        name.last_name()
+        adjective,
+        last_name
         |> string.lowercase(),
       ]
       |> join("_")
@@ -52,9 +54,7 @@ pub fn username() {
 }
 
 pub fn email() {
-  assert Ok(email_domain) =
-    email_domains
-    |> get_random_item
+  assert Ok(email_domain) = get_random_item(email_domains)
 
   [username(), email_domain]
   |> join("@")
@@ -77,34 +77,32 @@ pub fn passphrase() {
 }
 
 pub fn domain_name() {
-  let nonce = int.random(4, 2048)
+  let adjective = word.adjective()
+  let noun = word.noun()
 
+  let nonce = int.random(4, 2048)
   let hostname = case nonce % 3 {
     0 ->
-      [word.adjective(), word.noun()]
+      [adjective, noun]
       |> join(".")
 
     1 ->
-      [word.adjective(), word.noun()]
+      [adjective, noun]
       |> join("-")
 
     2 ->
-      [word.adjective(), word.noun()]
+      [adjective, noun]
       |> join("_")
   }
 
-  assert Ok(suffix) =
-    domain_suffixes
-    |> get_random_item
+  assert Ok(suffix) = get_random_item(domain_suffixes)
 
   [hostname, suffix]
   |> join(".")
 }
 
 pub fn url() {
-  assert Ok(protocol) =
-    protocols
-    |> get_random_item
+  assert Ok(protocol) = get_random_item(protocols)
 
   [protocol, "://", domain_name()]
   |> join("")
@@ -113,10 +111,7 @@ pub fn url() {
 pub fn ip_v4() {
   list.repeat("", 4)
   |> list.map(fn(_) { int.random(0, 256) })
-  |> list.map(fn(field) {
-    field
-    |> int.to_string
-  })
+  |> list.map(int.to_string)
   |> join(".")
 }
 
@@ -142,7 +137,7 @@ pub fn mac() {
   |> join(":")
 }
 
-pub fn hex_color() {
+pub fn long_hex_color() {
   [
     "#",
     ..list.repeat("", 3)
@@ -155,4 +150,27 @@ pub fn hex_color() {
     })
   ]
   |> join("")
+}
+
+pub fn short_hex_color() {
+  [
+    "#",
+    ..list.repeat("", 3)
+    |> list.map(fn(_) { int.random(0, 15) })
+    |> list.map(fn(field) {
+      field
+      |> int.to_base16
+      |> string.lowercase
+    })
+  ]
+  |> join("")
+}
+
+pub fn hex_color() {
+  let nonce = int.random(4, 2048)
+
+  case nonce % 2 {
+    0 -> long_hex_color()
+    1 -> short_hex_color()
+  }
 }
