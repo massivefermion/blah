@@ -12,4 +12,4 @@ repository = {type = "github", user = "massivefermion", repo = "blah"}
 gleam_stdlib = "~> 0.23"
 
 [dev-dependencies]
-gleeunit = "~> 0.6"
+gleeunit = "~> 0.7"
