@@ -1,7 +1,7 @@
 name = "blah"
-version = "0.1.0"
+version = "0.2.0"
 
-description = "random data generator for gleam"
+description = "fake data generation for gleam"
 licences = ["Apache-2.0"]
 links = [
   {title = "gleam", href = "https://gleam.run"},
