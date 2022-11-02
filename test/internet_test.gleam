@@ -82,7 +82,7 @@ pub fn ip_v6_test() {
   |> should.equal(8)
 
   fields
-  |> list.map(fn(f) { from_base_string(f, 16) })
+  |> list.map(from_base_string(_, 16))
   |> list.each(fn(f) { should.be_true(f >= 0 && f <= 65535) })
 }
 
@@ -94,7 +94,7 @@ pub fn mac_test() {
   |> should.equal(6)
 
   fields
-  |> list.map(fn(f) { from_base_string(f, 16) })
+  |> list.map(from_base_string(_, 16))
   |> list.each(fn(f) { should.be_true(f >= 0 && f <= 255) })
 }
 
@@ -113,6 +113,15 @@ pub fn short_hex_color_test() {
   assert Ok(re) = regex.from_string("^#[0-9a-fA-F]{3}$")
 
   regex.check(re, color)
+  |> should.be_true
+}
+
+pub fn mongo_object_id_test() {
+  let id = internet.mongo_object_id()
+
+  assert Ok(re) = regex.from_string("^[0-9a-fA-F]{24}$")
+
+  regex.check(re, id)
   |> should.be_true
 }
 
