@@ -25,11 +25,7 @@ pub fn slug(num: Int) {
 
 pub fn sentence() {
   let length = int.random(4, 16)
-  [
-    words(length)
-    |> string.capitalise,
-    ".",
-  ]
+  [string.capitalise(words(length)), "."]
   |> join("")
 }
 
