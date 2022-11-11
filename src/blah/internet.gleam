@@ -93,33 +93,21 @@ pub fn username() {
       |> join("")
 
     1 ->
-      [
-        adjective,
-        last_name
-        |> string.lowercase(),
-      ]
+      [adjective, string.lowercase(last_name)]
       |> join(".")
 
     2 ->
-      [
-        adjective,
-        last_name
-        |> string.lowercase(),
-      ]
+      [adjective, string.lowercase(last_name)]
       |> join("-")
 
     3 ->
-      [
-        adjective,
-        last_name
-        |> string.lowercase(),
-      ]
+      [adjective, string.lowercase(last_name)]
       |> join("_")
   }
 }
 
 pub fn email() {
-  assert Ok(email_domain) = get_random_item(email_domains)
+  let email_domain = get_random_item(email_domains)
 
   [username(), email_domain]
   |> join("@")
@@ -160,14 +148,14 @@ pub fn domain_name() {
       |> join("_")
   }
 
-  assert Ok(suffix) = get_random_item(domain_suffixes)
+  let suffix = get_random_item(domain_suffixes)
 
   [hostname, suffix]
   |> join(".")
 }
 
 pub fn url() {
-  assert Ok(protocol) = get_random_item(protocols)
+  let protocol = get_random_item(protocols)
 
   [protocol, "://", domain_name()]
   |> join("")
@@ -259,22 +247,12 @@ pub fn semver() {
 }
 
 pub fn language_code() {
-  assert Ok(code) =
-    language_codes
-    |> get_random_item
-  code
+  get_random_item(language_codes)
 }
 
 pub fn status_code() {
-  assert Ok(#(_, codes)) =
-    status_codes
-    |> get_random_item
-
-  assert Ok(code) =
-    codes
-    |> get_random_item
-
-  code
+  let #(_, codes) = get_random_item(status_codes)
+  get_random_item(codes)
 }
 
 pub fn status_code_in_class(class: HTTPStatusClass) {
@@ -287,44 +265,15 @@ pub fn status_code_in_class(class: HTTPStatusClass) {
   }
 
   let [#(_, codes)] =
-    status_codes
-    |> list.filter(fn(kv) { pair.first(kv) == class_string })
+    list.filter(status_codes, fn(kv) { pair.first(kv) == class_string })
 
-  assert Ok(code) =
-    codes
-    |> get_random_item
-
-  code
+  get_random_item(codes)
 }
 
 pub fn currency_symbol() {
-  assert Ok(symbol) =
-    currency_symbols
-    |> get_random_item
-  symbol
+  get_random_item(currency_symbols)
 }
 
 pub fn currency_code() {
-  assert Ok(code) =
-    currency_codes
-    |> get_random_item
-  code
-}
-
-pub fn roman_numeral(min: Int, max: Int) {
-  int.random(min, max)
-  |> list.repeat("I", _)
-  |> join("")
-  |> string.replace("IIIII", "V")
-  |> string.replace("VV", "X")
-  |> string.replace("XXXXX", "L")
-  |> string.replace("LL", "C")
-  |> string.replace("CCCCC", "D")
-  |> string.replace("DD", "M")
-  |> string.replace("MCCCC", "CM")
-  |> string.replace("CCCC", "CD")
-  |> string.replace("LXXXX", "XC")
-  |> string.replace("XXXX", "XL")
-  |> string.replace("VIIII", "IX")
-  |> string.replace("IIII", "IV")
+  get_random_item(currency_codes)
 }

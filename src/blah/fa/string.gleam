@@ -62,8 +62,8 @@ pub fn pronounceable() {
 
   case nonce % 2 {
     0 -> {
-      assert Ok(first) = get_random_item(starting_vowels)
-      assert Ok(second) = get_random_item(consonants)
+      let first = get_random_item(starting_vowels)
+      let second = get_random_item(consonants)
       pronounceable_internal(
         string_builder.from_strings([first, second]),
         length - 2,
@@ -81,14 +81,14 @@ fn pronounceable_internal(state: StringBuilder, remaining: Int) -> String {
       let nonce = int.random(4, 2048)
       let letters = case nonce % 2 {
         0 -> {
-          assert Ok(first) = get_random_item(vowels)
-          assert Ok(second) = get_random_item(consonants)
+          let first = get_random_item(vowels)
+          let second = get_random_item(consonants)
           [first, second]
           |> list.map(string_builder.from_string)
         }
         1 -> {
-          assert Ok(first) = get_random_item(consonants)
-          assert Ok(second) = get_random_item(vowels)
+          let first = get_random_item(consonants)
+          let second = get_random_item(vowels)
           [first, second]
           |> list.map(string_builder.from_string)
         }
@@ -106,7 +106,7 @@ fn alpha_internal(state: StringBuilder, remaining: Int) -> String {
     True -> string_builder.to_string(state)
 
     False -> {
-      assert Ok(letter) = get_random_item(letters)
+      let letter = get_random_item(letters)
       alpha_internal(string_builder.append(state, letter), remaining - 1)
     }
   }
@@ -117,7 +117,7 @@ fn numeric_internal(state: StringBuilder, remaining: Int) -> String {
     True -> string_builder.to_string(state)
 
     False -> {
-      assert Ok(digit) = get_random_item(digits)
+      let digit = get_random_item(digits)
       numeric_internal(string_builder.append(state, digit), remaining - 1)
     }
   }
@@ -128,7 +128,7 @@ fn alphanumeric_internal(state: StringBuilder, remaining: Int) -> String {
     True -> string_builder.to_string(state)
 
     False -> {
-      assert Ok(character) = get_random_item(characters)
+      let character = get_random_item(characters)
       alphanumeric_internal(
         string_builder.append(state, character),
         remaining - 1,
@@ -140,12 +140,12 @@ fn alphanumeric_internal(state: StringBuilder, remaining: Int) -> String {
 fn with_pattern_internal(state: StringBuilder, given_pattern: String) -> String {
   case string.first(given_pattern) {
     Ok("%") -> {
-      assert Ok(to_append) = case string.slice(given_pattern, 0, 2) {
+      let to_append = case string.slice(given_pattern, 0, 2) {
         "%d" -> get_random_item(digits)
         "%w" -> get_random_item(letters)
         "%c" -> get_random_item(characters)
         "%n" -> get_random_item(non_zero_digits)
-        characters -> Ok(characters)
+        characters -> characters
       }
       with_pattern_internal(
         string_builder.append(state, to_append),

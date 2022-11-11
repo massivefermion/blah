@@ -4,36 +4,29 @@ import blah/locales/en/word
 import blah/utils.{get_random_item}
 
 pub fn verb() {
-  assert Ok(verb) = get_random_item(word.verbs)
-  verb
+  get_random_item(word.verbs)
 }
 
 pub fn preposition() {
-  assert Ok(preposition) = get_random_item(word.prepositions)
-  preposition
+  get_random_item(word.prepositions)
 }
 
 pub fn noun() {
-  assert Ok(noun) = get_random_item(word.nouns)
-  noun
+  get_random_item(word.nouns)
 }
 
 pub fn interjection() {
-  assert Ok(interjection) = get_random_item(word.interjections)
-  interjection
+  get_random_item(word.interjections)
 }
 
 pub fn conjunction() {
-  assert Ok(conjunction) = get_random_item(word.conjunctions)
-  conjunction
+  get_random_item(word.conjunctions)
 }
 
 pub fn adverb() {
-  assert Ok(adverb) = get_random_item(word.adverbs)
-  adverb
+  get_random_item(word.adverbs)
 }
 
 pub fn adjective() {
-  assert Ok(adjective) = get_random_item(word.adjectives)
-  adjective
+  get_random_item(word.adjectives)
 }

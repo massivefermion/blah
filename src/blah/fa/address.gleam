@@ -4,26 +4,23 @@ import blah/locales/fa/address
 import blah/utils.{get_random_item, join}
 
 pub fn country() {
-  assert Ok(country) = get_random_item(address.countries)
-  country
+  get_random_item(address.countries)
 }
 
 pub fn province() {
-  assert Ok(state) = get_random_item(address.provinces)
-  state
+  get_random_item(address.provinces)
 }
 
 pub fn city() {
-  assert Ok(city) = get_random_item(address.cities)
-  city
+  get_random_item(address.cities)
 }
 
 pub fn street() {
   let nonce = int.random(4, 2048)
 
-  assert Ok(prefix) = get_random_item(address.street_prefixes)
+  let prefix = get_random_item(address.street_prefixes)
 
-  assert Ok(street) = get_random_item(address.streets)
+  let street = get_random_item(address.streets)
 
   let street =
     [prefix, street]
@@ -33,8 +30,8 @@ pub fn street() {
     0 -> street
 
     1 -> {
-      assert Ok(prefix) = get_random_item(address.alley_prefixes)
-      assert Ok(alley) = get_random_item(address.streets)
+      let prefix = get_random_item(address.alley_prefixes)
+      let alley = get_random_item(address.streets)
       let alley =
         [prefix, alley]
         |> join(" ")
@@ -63,8 +60,7 @@ pub fn unit() {
 }
 
 pub fn direction() {
-  assert Ok(direction) = get_random_item(address.directions)
-  direction
+  get_random_item(address.directions)
 }
 
 pub fn full_address() {

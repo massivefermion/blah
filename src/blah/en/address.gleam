@@ -7,37 +7,31 @@ import blah/locales/en/address
 import blah/utils.{get_random_item, join}
 
 pub fn country() {
-  assert Ok(country) = get_random_item(address.countries)
-  country
+  get_random_item(address.countries)
 }
 
 pub fn country_code() {
-  assert Ok(country_code) = get_random_item(address.country_codes)
-  country_code
+  get_random_item(address.country_codes)
 }
 
 pub fn alpha3_country_code() {
-  assert Ok(country_code) = get_random_item(address.alpha3_country_codes)
-  country_code
+  get_random_item(address.alpha3_country_codes)
 }
 
 pub fn state() {
-  assert Ok(state) = get_random_item(address.states)
-  state
+  get_random_item(address.states)
 }
 
 pub fn state_code() {
-  assert Ok(state_code) = get_random_item(address.state_codes)
-  state_code
+  get_random_item(address.state_codes)
 }
 
 pub fn city() {
-  assert Ok(city) = get_random_item(address.cities)
-  city
+  get_random_item(address.cities)
 }
 
 pub fn street() {
-  assert Ok(street) = get_random_item(address.streets)
+  let street = get_random_item(address.streets)
   [name.last_name(), street]
   |> join(" ")
 }
@@ -52,13 +46,11 @@ pub fn zip_code() {
 }
 
 pub fn direction() {
-  assert Ok(direction) = get_random_item(address.directions)
-  direction
+  get_random_item(address.directions)
 }
 
 pub fn direction_code() {
-  assert Ok(direction_code) = get_random_item(address.direction_codes)
-  direction_code
+  get_random_item(address.direction_codes)
 }
 
 pub fn full_address() {
@@ -67,6 +59,5 @@ pub fn full_address() {
 }
 
 pub fn time_zone() {
-  assert Ok(zone) = get_random_item(address.time_zones)
-  zone
+  get_random_item(address.time_zones)
 }

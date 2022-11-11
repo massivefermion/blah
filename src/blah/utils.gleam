@@ -5,7 +5,8 @@ import gleam/string_builder
 pub fn get_random_item(given_list: List(a)) {
   let max_index = list.length(given_list)
   let index = int.random(0, max_index)
-  list.at(given_list, index)
+  assert Ok(item) = list.at(given_list, index)
+  item
 }
 
 pub fn join(parts: List(String), separator: String) {

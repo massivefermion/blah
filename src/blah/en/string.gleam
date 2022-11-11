@@ -1,5 +1,7 @@
 //// same as `blah/string`
 
+import gleam/int
+import gleam/list
 import gleam/string
 import gleam/string_builder.{StringBuilder}
 import blah/utils.{get_random_item}
@@ -70,12 +72,31 @@ pub fn with_pattern(given_pattern: String) {
   with_pattern_internal(string_builder.new(), given_pattern)
 }
 
+pub fn roman_numeral(min: Int, max: Int) {
+  int.random(min, max)
+  |> list.repeat("I", _)
+  |> string_builder.from_strings
+  |> string_builder.replace("IIIII", "V")
+  |> string_builder.replace("VV", "X")
+  |> string_builder.replace("XXXXX", "L")
+  |> string_builder.replace("LL", "C")
+  |> string_builder.replace("CCCCC", "D")
+  |> string_builder.replace("DD", "M")
+  |> string_builder.replace("DCCCC", "CM")
+  |> string_builder.replace("CCCC", "CD")
+  |> string_builder.replace("LXXXX", "XC")
+  |> string_builder.replace("XXXX", "XL")
+  |> string_builder.replace("VIIII", "IX")
+  |> string_builder.replace("IIII", "IV")
+  |> string_builder.to_string
+}
+
 fn alpha_internal(state: StringBuilder, remaining: Int) -> String {
   case remaining == 0 {
     True -> string_builder.to_string(state)
 
     False -> {
-      assert Ok(letter) = get_random_item(letters)
+      let letter = get_random_item(letters)
       alpha_internal(string_builder.append(state, letter), remaining - 1)
     }
   }
@@ -86,7 +107,7 @@ fn lower_internal(state: StringBuilder, remaining: Int) -> String {
     True -> string_builder.to_string(state)
 
     False -> {
-      assert Ok(letter) = get_random_item(lower_letters)
+      let letter = get_random_item(lower_letters)
       lower_internal(string_builder.append(state, letter), remaining - 1)
     }
   }
@@ -97,7 +118,7 @@ fn upper_internal(state: StringBuilder, remaining: Int) -> String {
     True -> string_builder.to_string(state)
 
     False -> {
-      assert Ok(letter) = get_random_item(upper_letters)
+      let letter = get_random_item(upper_letters)
       upper_internal(string_builder.append(state, letter), remaining - 1)
     }
   }
@@ -108,7 +129,7 @@ fn numeric_internal(state: StringBuilder, remaining: Int) -> String {
     True -> string_builder.to_string(state)
 
     False -> {
-      assert Ok(digit) = get_random_item(digits)
+      let digit = get_random_item(digits)
       numeric_internal(string_builder.append(state, digit), remaining - 1)
     }
   }
@@ -119,7 +140,7 @@ fn alphanumeric_internal(state: StringBuilder, remaining: Int) -> String {
     True -> string_builder.to_string(state)
 
     False -> {
-      assert Ok(character) = get_random_item(characters)
+      let character = get_random_item(characters)
       alphanumeric_internal(
         string_builder.append(state, character),
         remaining - 1,
@@ -131,14 +152,14 @@ fn alphanumeric_internal(state: StringBuilder, remaining: Int) -> String {
 fn with_pattern_internal(state: StringBuilder, given_pattern: String) -> String {
   case string.first(given_pattern) {
     Ok("%") -> {
-      assert Ok(to_append) = case string.slice(given_pattern, 0, 2) {
+      let to_append = case string.slice(given_pattern, 0, 2) {
         "%d" -> get_random_item(digits)
         "%w" -> get_random_item(letters)
         "%c" -> get_random_item(characters)
         "%l" -> get_random_item(lower_letters)
         "%u" -> get_random_item(upper_letters)
         "%n" -> get_random_item(non_zero_digits)
-        characters -> Ok(characters)
+        characters -> characters
       }
       with_pattern_internal(
         string_builder.append(state, to_append),

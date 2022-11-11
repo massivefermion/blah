@@ -7,8 +7,7 @@ import blah/locales/en/lorem
 import blah/utils.{get_random_item, join}
 
 pub fn word() {
-  assert Ok(word) = get_random_item(lorem.words)
-  word
+  get_random_item(lorem.words)
 }
 
 pub fn words(num: Int) {

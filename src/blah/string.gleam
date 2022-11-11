@@ -39,3 +39,7 @@ pub fn alphanumeric(length: Int) {
 pub fn with_pattern(given_pattern: String) {
   string.with_pattern(given_pattern)
 }
+
+pub fn roman_numeral(min: Int, max: Int) {
+  string.roman_numeral(min, max)
+}
