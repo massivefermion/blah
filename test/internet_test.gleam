@@ -1,8 +1,8 @@
-import gleeunit/should
 import gleam/int
 import gleam/list
 import gleam/regex
 import gleam/string
+import gleeunit/should
 import blah/internet
 
 pub fn username_test() {

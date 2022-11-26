@@ -1,7 +1,8 @@
 //// same as `blah/name`
 
+import gleam/string
 import blah/locales/en/name
-import blah/utils.{get_random_item, join}
+import blah/utils.{get_random_item}
 
 pub fn first_name() {
   get_random_item(name.first_names)
@@ -21,15 +22,15 @@ pub fn last_name() {
 
 pub fn full_name() {
   [first_name(), last_name()]
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn female_full_name() {
   [female_first_name(), last_name()]
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn male_full_name() {
   [male_first_name(), last_name()]
-  |> join(" ")
+  |> string.join(" ")
 }

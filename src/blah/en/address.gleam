@@ -1,10 +1,11 @@
 //// same as `blah/address`
 
 import gleam/int
-import blah/en/string
+import gleam/string
 import blah/name
 import blah/locales/en/address
-import blah/utils.{get_random_item, join}
+import blah/utils.{get_random_item}
+import blah/en/string as blah_string
 
 pub fn country() {
   get_random_item(address.countries)
@@ -33,15 +34,15 @@ pub fn city() {
 pub fn street() {
   let street = get_random_item(address.streets)
   [name.last_name(), street]
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn zip_code() {
   let nonce = int.random(4, 2048)
 
   case nonce % 2 {
-    0 -> string.with_pattern("%d%d%d%d%d-%d%d%d%d")
-    1 -> string.numeric(5)
+    0 -> blah_string.with_pattern("%d%d%d%d%d-%d%d%d%d")
+    1 -> blah_string.numeric(5)
   }
 }
 
@@ -54,8 +55,8 @@ pub fn direction_code() {
 }
 
 pub fn full_address() {
-  [string.with_pattern("%n%d%d%d"), street()]
-  |> join(" ")
+  [blah_string.with_pattern("%n%d%d%d"), street()]
+  |> string.join(" ")
 }
 
 pub fn time_zone() {

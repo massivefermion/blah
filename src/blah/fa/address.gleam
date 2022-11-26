@@ -1,7 +1,8 @@
 import gleam/int
-import blah/fa/string
+import gleam/string
 import blah/locales/fa/address
-import blah/utils.{get_random_item, join}
+import blah/utils.{get_random_item}
+import blah/fa/string as blah_string
 
 pub fn country() {
   get_random_item(address.countries)
@@ -24,7 +25,7 @@ pub fn street() {
 
   let street =
     [prefix, street]
-    |> join(" ")
+    |> string.join(" ")
 
   case nonce % 2 {
     0 -> street
@@ -34,29 +35,29 @@ pub fn street() {
       let alley = get_random_item(address.streets)
       let alley =
         [prefix, alley]
-        |> join(" ")
+        |> string.join(" ")
       [street, alley]
-      |> join("، ")
+      |> string.join("، ")
     }
   }
 }
 
 pub fn postal_code() {
-  string.with_pattern("%n%d%d%d%d-%n%d%d%d%d")
+  blah_string.with_pattern("%n%d%d%d%d-%n%d%d%d%d")
 }
 
 pub fn floor() {
   let length = int.random(1, 2)
-  let floor = string.numeric(length)
+  let floor = blah_string.numeric(length)
   ["طبقه‌ی", floor]
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn unit() {
   let length = int.random(1, 3)
-  let unit = string.numeric(length)
+  let unit = blah_string.numeric(length)
   ["واحد", unit]
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn direction() {
@@ -65,5 +66,5 @@ pub fn direction() {
 
 pub fn full_address() {
   [street(), floor(), unit()]
-  |> join("، ")
+  |> string.join("، ")
 }

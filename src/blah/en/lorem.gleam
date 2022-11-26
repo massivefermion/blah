@@ -4,7 +4,7 @@ import gleam/int
 import gleam/list
 import gleam/string
 import blah/locales/en/lorem
-import blah/utils.{get_random_item, join}
+import blah/utils.{get_random_item}
 
 pub fn word() {
   get_random_item(lorem.words)
@@ -13,36 +13,36 @@ pub fn word() {
 pub fn words(num: Int) {
   list.repeat("", num)
   |> list.map(fn(_) { word() })
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn slug(num: Int) {
   list.repeat("", num)
   |> list.map(fn(_) { word() })
-  |> join("-")
+  |> string.join("-")
 }
 
 pub fn sentence() {
   let length = int.random(4, 16)
   [string.capitalise(words(length)), "."]
-  |> join("")
+  |> string.join("")
 }
 
 pub fn sentences(num: Int) {
   list.repeat("", num)
   |> list.map(fn(_) { sentence() })
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn paragraph() {
   let length = int.random(4, 8)
   list.repeat("", length)
   |> list.map(fn(_) { sentence() })
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn paragraphs(num: Int) {
   list.repeat("", num)
   |> list.map(fn(_) { paragraph() })
-  |> join("\n")
+  |> string.join("\n")
 }

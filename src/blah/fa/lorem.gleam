@@ -1,39 +1,39 @@
 import gleam/int
 import gleam/list
-import blah/fa/string
-import blah/utils.{join}
+import gleam/string
+import blah/fa/string as blah_string
 
 pub fn word() {
-  string.pronounceable()
+  blah_string.pronounceable()
 }
 
 pub fn words(num: Int) {
   list.repeat("", num)
   |> list.map(fn(_) { word() })
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn sentence() {
   let length = int.random(4, 16)
   [words(length), "."]
-  |> join("")
+  |> string.join("")
 }
 
 pub fn sentences(num: Int) {
   list.repeat("", num)
   |> list.map(fn(_) { sentence() })
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn paragraph() {
   let length = int.random(4, 8)
   list.repeat("", length)
   |> list.map(fn(_) { sentence() })
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn paragraphs(num: Int) {
   list.repeat("", num)
   |> list.map(fn(_) { paragraph() })
-  |> join("\n")
+  |> string.join("\n")
 }

@@ -1,6 +1,6 @@
-import gleeunit/should
 import gleam/list
 import blah/fa/word
+import gleeunit/should
 import blah/locales/fa/word as word_repo
 
 pub fn verb_test() {

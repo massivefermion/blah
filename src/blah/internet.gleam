@@ -2,10 +2,10 @@ import gleam/int
 import gleam/pair
 import gleam/list
 import gleam/string
-import blah/en/word
 import blah/name
+import blah/en/word
+import blah/utils.{get_random_item}
 import blah/en/string as blah_string
-import blah/utils.{get_random_item, join}
 
 const email_domains = [
   "aol.com", "gmail.com", "hotmail.com", "live.com", "mail.ru", "msn.com",
@@ -90,19 +90,19 @@ pub fn username() {
   case nonce % 4 {
     0 ->
       [adjective, last_name]
-      |> join("")
+      |> string.join("")
 
     1 ->
       [adjective, string.lowercase(last_name)]
-      |> join(".")
+      |> string.join(".")
 
     2 ->
       [adjective, string.lowercase(last_name)]
-      |> join("-")
+      |> string.join("-")
 
     3 ->
       [adjective, string.lowercase(last_name)]
-      |> join("_")
+      |> string.join("_")
   }
 }
 
@@ -110,7 +110,7 @@ pub fn email() {
   let email_domain = get_random_item(email_domains)
 
   [username(), email_domain]
-  |> join("@")
+  |> string.join("@")
 }
 
 pub fn password() {
@@ -126,7 +126,7 @@ pub fn passphrase() {
     word.verb(),
     word.adverb(),
   ]
-  |> join(" ")
+  |> string.join(" ")
 }
 
 pub fn domain_name() {
@@ -137,35 +137,35 @@ pub fn domain_name() {
   let hostname = case nonce % 3 {
     0 ->
       [adjective, noun]
-      |> join(".")
+      |> string.join(".")
 
     1 ->
       [adjective, noun]
-      |> join("-")
+      |> string.join("-")
 
     2 ->
       [adjective, noun]
-      |> join("_")
+      |> string.join("_")
   }
 
   let suffix = get_random_item(domain_suffixes)
 
   [hostname, suffix]
-  |> join(".")
+  |> string.join(".")
 }
 
 pub fn url() {
   let protocol = get_random_item(protocols)
 
   [protocol, "://", domain_name()]
-  |> join("")
+  |> string.join("")
 }
 
 pub fn ip_v4() {
   list.repeat("", 4)
   |> list.map(fn(_) { int.random(0, 256) })
   |> list.map(int.to_string)
-  |> join(".")
+  |> string.join(".")
 }
 
 pub fn ip_v6() {
@@ -176,7 +176,7 @@ pub fn ip_v6() {
     |> int.to_base16
     |> string.lowercase
   })
-  |> join(":")
+  |> string.join(":")
 }
 
 pub fn mac() {
@@ -187,7 +187,7 @@ pub fn mac() {
     |> int.to_base16
     |> string.lowercase
   })
-  |> join(":")
+  |> string.join(":")
 }
 
 pub fn long_hex_color() {
@@ -202,7 +202,7 @@ pub fn long_hex_color() {
       |> string.pad_left(2, "0")
     })
   ]
-  |> join("")
+  |> string.join("")
 }
 
 pub fn short_hex_color() {
@@ -216,7 +216,7 @@ pub fn short_hex_color() {
       |> string.lowercase
     })
   ]
-  |> join("")
+  |> string.join("")
 }
 
 pub fn hex_color() {
@@ -236,14 +236,14 @@ pub fn mongo_object_id() {
     |> int.to_base16
     |> string.lowercase
   })
-  |> join("")
+  |> string.join("")
 }
 
 pub fn semver() {
   list.repeat("", int.random(2, 4))
   |> list.map(fn(_) { int.random(0, 32) })
   |> list.map(int.to_string)
-  |> join(".")
+  |> string.join(".")
 }
 
 pub fn language_code() {
