@@ -66,7 +66,7 @@ pub fn ip_v4_test() {
   |> list.length
   |> should.equal(4)
 
-  assert Ok(fields) =
+  let assert Ok(fields) =
     fields
     |> list.try_map(int.parse)
 
@@ -83,7 +83,7 @@ pub fn ip_v6_test() {
 
   fields
   |> list.map(from_base_string(_, 16))
-  |> list.each(fn(f) { should.be_true(f >= 0 && f <= 65535) })
+  |> list.each(fn(f) { should.be_true(f >= 0 && f <= 65_535) })
 }
 
 pub fn mac_test() {
@@ -101,7 +101,7 @@ pub fn mac_test() {
 pub fn long_hex_color_test() {
   let color = internet.long_hex_color()
 
-  assert Ok(re) = regex.from_string("^#[0-9a-fA-F]{6}$")
+  let assert Ok(re) = regex.from_string("^#[0-9a-fA-F]{6}$")
 
   regex.check(re, color)
   |> should.be_true
@@ -110,7 +110,7 @@ pub fn long_hex_color_test() {
 pub fn short_hex_color_test() {
   let color = internet.short_hex_color()
 
-  assert Ok(re) = regex.from_string("^#[0-9a-fA-F]{3}$")
+  let assert Ok(re) = regex.from_string("^#[0-9a-fA-F]{3}$")
 
   regex.check(re, color)
   |> should.be_true
@@ -119,7 +119,7 @@ pub fn short_hex_color_test() {
 pub fn mongo_object_id_test() {
   let id = internet.mongo_object_id()
 
-  assert Ok(re) = regex.from_string("^[0-9a-fA-F]{24}$")
+  let assert Ok(re) = regex.from_string("^[0-9a-fA-F]{24}$")
 
   regex.check(re, id)
   |> should.be_true
