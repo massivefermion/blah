@@ -36,30 +36,6 @@ const language_codes = [
   "zh", "zu",
 ]
 
-const currency_symbols = [
-  "$", "£", "¥", "ƒ", "р", "֏", "৳", "฿", "₡", "₦", "₩", "₪",
-  "₫", "€", "₭", "₮", "₱", "₲", "₴", "₵", "₸", "₹", "₺",
-  "₼", "₽", "₾",
-]
-
-const currency_codes = [
-  "aed", "afn", "all", "amd", "ang", "aoa", "ars", "aud", "awg", "azn", "bam",
-  "bbd", "bdt", "bgn", "bhd", "bif", "bmd", "bnd", "bob", "brl", "bsd", "btn",
-  "bwp", "byn", "bzd", "cad", "cdf", "chf", "clp", "cny", "cop", "crc", "cup",
-  "cve", "czk", "djf", "dkk", "dop", "dzd", "egp", "ern", "etb", "eur", "fjd",
-  "fkp", "gbp", "gel", "ghs", "gip", "gmd", "gnf", "gtq", "gyd", "hkd", "hnl",
-  "hrk", "htg", "huf", "idr", "ils", "inr", "iqd", "irr", "isk", "jmd", "jod",
-  "jpy", "kes", "kgs", "khr", "kmf", "kpw", "krw", "kwd", "kyd", "kzt", "lak",
-  "lbp", "lkr", "lrd", "lsl", "lyd", "lek", "lev", "mad", "mdl", "mga", "mkd",
-  "mmk", "mnt", "mop", "mru", "mur", "mvr", "mwk", "mxn", "myr", "mzn", "nad",
-  "ngn", "nio", "nok", "npr", "nzd", "nkf", "omr", "pab", "pen", "pgk", "php",
-  "pkr", "pln", "pyg", "qar", "ron", "rsd", "rub", "rwf", "sar", "sbd", "scr",
-  "sdg", "sek", "sgd", "shp", "sle", "sos", "srd", "ssp", "stn", "syp", "szl",
-  "thb", "tjs", "tmt", "tnd", "top", "try", "ttd", "twd", "tzs", "uah", "ugx",
-  "usd", "uyu", "uzs", "ved", "ves", "vnd", "vuv", "wst", "xaf", "xcd", "xof",
-  "xpf", "yer", "zar", "zmw",
-]
-
 const status_codes = [
   #("informational", [100, 101, 102, 103]),
   #("successful", [200, 201, 202, 203, 204, 205, 206, 207, 208, 226]),
@@ -170,7 +146,7 @@ pub fn ip_v4() {
 
 pub fn ip_v6() {
   list.repeat("", 8)
-  |> list.map(fn(_) { int.random(0, 65536) })
+  |> list.map(fn(_) { int.random(0, 65_536) })
   |> list.map(fn(field) {
     field
     |> int.to_base16
@@ -268,12 +244,4 @@ pub fn status_code_in_class(class: HTTPStatusClass) {
     list.filter(status_codes, fn(kv) { pair.first(kv) == class_string })
 
   get_random_item(codes)
-}
-
-pub fn currency_symbol() {
-  get_random_item(currency_symbols)
-}
-
-pub fn currency_code() {
-  get_random_item(currency_codes)
 }
