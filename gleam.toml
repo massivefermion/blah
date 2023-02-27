@@ -8,6 +8,11 @@ links = [
 ]
 repository = {type = "github", user = "massivefermion", repo = "blah"}
 
+internal_modules = [
+  "blah/locales/*",
+  "blah/en/*",
+]
+
 [dependencies]
 gleam_stdlib = "~> 0.27"
 
