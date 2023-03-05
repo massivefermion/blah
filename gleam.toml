@@ -1,5 +1,5 @@
 name = "blah"
-version = "0.6.0"
+version = "0.7.0"
 
 description = "fake data generation for gleam"
 licences = ["Apache-2.0"]
@@ -9,8 +9,9 @@ links = [
 repository = {type = "github", user = "massivefermion", repo = "blah"}
 
 internal_modules = [
-  "blah/locales/*",
   "blah/en/*",
+  "blah/utils",
+  "blah/locales/*",
 ]
 
 [dependencies]

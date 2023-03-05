@@ -82,7 +82,8 @@ pub fn ip_v6_test() {
   |> should.equal(8)
 
   fields
-  |> list.map(from_base_string(_, 16))
+  |> list.map(int.base_parse(_, 16))
+  |> list.map(should.be_ok)
   |> list.each(fn(f) { should.be_true(f >= 0 && f <= 65_535) })
 }
 
@@ -94,7 +95,8 @@ pub fn mac_test() {
   |> should.equal(6)
 
   fields
-  |> list.map(from_base_string(_, 16))
+  |> list.map(int.base_parse(_, 16))
+  |> list.map(should.be_ok)
   |> list.each(fn(f) { should.be_true(f >= 0 && f <= 255) })
 }
 
@@ -135,6 +137,3 @@ fn verify_username(username: String) -> Bool {
 fn verify_domain_name(domain_name: String) -> Bool {
   list.length(string.split(domain_name, ".")) > 1
 }
-
-external fn from_base_string(string: String, base: Int) -> Int =
-  "erlang" "binary_to_integer"
