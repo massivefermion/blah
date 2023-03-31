@@ -11,10 +11,19 @@ pub fn in_interval(from: time.Time, to: time.Time) -> time.Time {
 }
 
 pub fn symmetric(distance: duration.Duration) {
-  case int.random(-1, 2) > 0 {
-    True -> future(duration.Duration(0), distance)
-    _ -> past(duration.Duration(0), distance)
-  }
+  let now = time.now()
+
+  let unix_from =
+    now
+    |> time.subtract(distance)
+    |> time.to_unix
+  let unix_to =
+    now
+    |> time.add(distance)
+    |> time.to_unix
+
+  int.random(unix_from, unix_to)
+  |> time.from_unix()
 }
 
 pub fn past(
