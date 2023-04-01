@@ -204,6 +204,26 @@ pub fn hex_color() {
   }
 }
 
+pub fn uuid() {
+  list.repeat("", 32)
+  |> list.map(fn(_) { int.random(0, 15) })
+  |> list.map(fn(digit) {
+    digit
+    |> int.to_base16
+    |> string.lowercase
+  })
+  |> list.fold(
+    "",
+    fn(uuid, char) {
+      let uuid = string.append(uuid, char)
+      case string.length(uuid) {
+        8 | 13 | 18 | 23 -> string.append(uuid, "-")
+        _ -> uuid
+      }
+    },
+  )
+}
+
 pub fn mongo_object_id() {
   list.repeat("", 24)
   |> list.map(fn(_) { int.random(0, 15) })
