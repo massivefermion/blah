@@ -1,5 +1,3 @@
-//// same as `blah/finance`
-
 import blah/locales/en/finance
 import blah/utils.{get_random_item}
 

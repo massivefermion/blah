@@ -2,7 +2,7 @@ import gleam/int
 import birl/time
 import birl/duration
 
-pub fn in_interval(from: time.Time, to: time.Time) -> time.Time {
+pub fn in_interval(from: time.DateTime, to: time.DateTime) -> time.DateTime {
   let unix_from = time.to_unix(from)
   let unix_to = time.to_unix(to)
 
@@ -29,7 +29,7 @@ pub fn symmetric(distance: duration.Duration) {
 pub fn past(
   min_distance: duration.Duration,
   max_distance: duration.Duration,
-) -> time.Time {
+) -> time.DateTime {
   let now = time.now()
 
   let unix_from =
@@ -48,7 +48,7 @@ pub fn past(
 pub fn future(
   min_distance: duration.Duration,
   max_distance: duration.Duration,
-) -> time.Time {
+) -> time.DateTime {
   let now = time.now()
 
   let unix_from =

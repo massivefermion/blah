@@ -4,6 +4,7 @@ import gleam/regex
 import gleam/string
 import gleeunit/should
 import blah/internet
+import blah/other
 
 pub fn username_test() {
   internet.username()
@@ -119,7 +120,7 @@ pub fn short_hex_color_test() {
 }
 
 pub fn mongo_object_id_test() {
-  let id = internet.mongo_object_id()
+  let id = other.mongo_object_id()
 
   let assert Ok(re) = regex.from_string("^[0-9a-fA-F]{24}$")
 
