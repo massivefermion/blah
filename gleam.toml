@@ -1,5 +1,5 @@
 name = "blah"
-version = "0.9.0"
+version = "0.10.0"
 
 description = "fake data generation for gleam"
 licences = ["Apache-2.0"]
@@ -15,8 +15,8 @@ internal_modules = [
 ]
 
 [dependencies]
-birl = "~> 0.11"
-gleam_stdlib = "~> 0.28"
+birl = "~> 0.14"
+gleam_stdlib = "~> 0.30"
 
 [dev-dependencies]
 gleeunit = "~> 0.10"
