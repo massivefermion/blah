@@ -1,7 +1,7 @@
 import gleam/int
 import gleam/list
 import gleam/string
-import gleam/string_builder.{StringBuilder}
+import gleam/string_builder.{type StringBuilder}
 import blah/utils.{get_random_item}
 
 const vowels = ["ا", "و"]
