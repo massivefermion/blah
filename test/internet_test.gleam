@@ -1,19 +1,20 @@
+import gleam/uri
 import gleam/int
 import gleam/list
 import gleam/regex
 import gleam/string
 import gleeunit/should
-import blah/internet
 import blah/other
+import blah/internet
 
 pub fn username_test() {
-  internet.username()
+  internet.username("edgar")
   |> verify_username
   |> should.be_true
 }
 
 pub fn email_test() {
-  let email_parts = string.split(internet.email(), "@")
+  let email_parts = string.split(internet.email("simon"), "@")
 
   list.length(email_parts)
   |> should.equal(2)
@@ -37,27 +38,10 @@ pub fn passphrase_test() {
   |> should.equal(4)
 }
 
-pub fn domain_name_test() {
-  internet.domain_name()
-  |> verify_domain_name
-  |> should.be_true
-}
-
-pub fn url_test() {
-  let url_parts = string.split(internet.url(), "://")
-
-  url_parts
-  |> list.length
-  |> should.equal(2)
-
-  let [protocol, domain_name] = url_parts
-
-  list.contains(["http", "https"], protocol)
-  |> should.be_true
-
-  domain_name
-  |> verify_domain_name
-  |> should.be_true
+pub fn uri_test() {
+  internet.uri()
+  |> uri.parse
+  |> should.be_ok
 }
 
 pub fn ip_v4_test() {
@@ -133,8 +117,4 @@ fn verify_username(username: String) -> Bool {
     string.to_graphemes(username),
     fn(g) { list.contains([".", "-", "_"], g) || string.uppercase(g) == g },
   )
-}
-
-fn verify_domain_name(domain_name: String) -> Bool {
-  list.length(string.split(domain_name, ".")) > 1
 }

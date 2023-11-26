@@ -7,31 +7,6 @@ import blah/en/word
 import blah/utils.{get_random_item}
 import blah/en/string as blah_string
 
-const email_domains = [
-  "aol.com", "gmail.com", "hotmail.com", "live.com", "mail.ru", "msn.com",
-  "outlook.com", "proton.me", "protonmail.com", "yahoo.com", "ymail.com",
-]
-
-const domain_suffixes = [
-  "co", "com", "edu", "gov", "int", "io", "mil", "net", "org",
-]
-
-const protocols = ["http", "https"]
-
-const status_codes = [
-  #("informational", [100, 101, 102, 103]),
-  #("successful", [200, 201, 202, 203, 204, 205, 206, 207, 208, 226]),
-  #("redirection", [300, 301, 302, 303, 304, 305, 306, 307, 308]),
-  #(
-    "client_error",
-    [
-      400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414,
-      415, 416, 417, 418, 421, 422, 423, 424, 425, 426, 428, 429, 431, 451,
-    ],
-  ),
-  #("server_error", [500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511]),
-]
-
 pub type HTTPStatusClass {
   Informational
   Successful
@@ -40,34 +15,65 @@ pub type HTTPStatusClass {
   ServerError
 }
 
-pub fn username() {
+pub fn username(name: String) {
   let adjective = word.adjective()
-  let last_name = name.last_name()
 
   let nonce = int.random(4, 2048)
-  case nonce % 4 {
+  case nonce % 8 {
     0 ->
-      [adjective, last_name]
+      [adjective, string.replace(name, " ", "")]
       |> string.join("")
 
     1 ->
-      [adjective, string.lowercase(last_name)]
+      [adjective, string.replace(string.lowercase(name), " ", ".")]
       |> string.join(".")
 
     2 ->
-      [adjective, string.lowercase(last_name)]
+      [adjective, string.replace(string.lowercase(name), " ", "-")]
       |> string.join("-")
 
     3 ->
-      [adjective, string.lowercase(last_name)]
+      [adjective, string.replace(string.lowercase(name), " ", "_")]
+      |> string.join("_")
+
+    4 ->
+      [
+        adjective,
+        string.replace(name, " ", ""),
+        blah_string.with_pattern("%d%d"),
+      ]
+      |> string.join("")
+
+    5 ->
+      [
+        adjective,
+        string.replace(string.lowercase(name), " ", "."),
+        blah_string.with_pattern("%d%d"),
+      ]
+      |> string.join(".")
+
+    6 ->
+      [
+        adjective,
+        string.replace(string.lowercase(name), " ", "-"),
+        blah_string.with_pattern("%d%d"),
+      ]
+      |> string.join("-")
+
+    7 ->
+      [
+        adjective,
+        string.replace(string.lowercase(name), " ", "_"),
+        blah_string.with_pattern("%d%d"),
+      ]
       |> string.join("_")
   }
 }
 
-pub fn email() {
+pub fn email(name) {
   let email_domain = get_random_item(email_domains)
 
-  [username(), email_domain]
+  [username(name), email_domain]
   |> string.join("@")
 }
 
@@ -112,11 +118,44 @@ pub fn domain_name() {
   |> string.join(".")
 }
 
-pub fn url() {
+pub fn uri() {
+  let nonce = int.random(4, 2048)
   let protocol = get_random_item(protocols)
 
-  [protocol, "://", domain_name()]
-  |> string.join("")
+  case nonce % 4 {
+    0 ->
+      [protocol, "://", domain_name()]
+      |> string.join("")
+
+    1 ->
+      [protocol, "://", domain_name(), "/"]
+      |> string.join("")
+
+    2 ->
+      [
+        protocol,
+        "://",
+        domain_name(),
+        "/",
+        list.repeat("", int.random(2, 8))
+        |> list.map(fn(_) { word.noun() })
+        |> string.join("/"),
+      ]
+      |> string.join("")
+
+    3 ->
+      [
+        protocol,
+        "://",
+        domain_name(),
+        "/",
+        list.repeat("", int.random(2, 8))
+        |> list.map(fn(_) { word.noun() })
+        |> string.join("/"),
+        "/",
+      ]
+      |> string.join("")
+  }
 }
 
 pub fn ip_v4() {
@@ -192,16 +231,33 @@ pub fn status_code() {
 }
 
 pub fn status_code_in_class(class: HTTPStatusClass) {
-  let class_string = case class {
-    Informational -> "informational"
-    Successful -> "successful"
-    Redirection -> "redirection"
-    ClientError -> "client_error"
-    ServerError -> "server_error"
-  }
-
   let [#(_, codes)] =
-    list.filter(status_codes, fn(kv) { pair.first(kv) == class_string })
+    list.filter(status_codes, fn(kv) { pair.first(kv) == class })
 
   get_random_item(codes)
 }
+
+const email_domains = [
+  "aol.com", "gmail.com", "hotmail.com", "live.com", "mail.ru", "msn.com",
+  "outlook.com", "proton.me", "protonmail.com", "yahoo.com", "ymail.com",
+]
+
+const domain_suffixes = [
+  "co", "com", "edu", "gov", "int", "io", "mil", "net", "org",
+]
+
+const protocols = ["http", "https"]
+
+const status_codes = [
+  #(Informational, [100, 101, 102, 103]),
+  #(Successful, [200, 201, 202, 203, 204, 205, 206, 207, 208, 226]),
+  #(Redirection, [300, 301, 302, 303, 304, 305, 306, 307, 308]),
+  #(
+    ClientError,
+    [
+      400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414,
+      415, 416, 417, 418, 421, 422, 423, 424, 425, 426, 428, 429, 431, 451,
+    ],
+  ),
+  #(ServerError, [500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511]),
+]

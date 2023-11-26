@@ -1,65 +1,59 @@
 import gleam/int
-import birl/time
+import birl
 import birl/duration
 
-pub fn in_interval(from: time.DateTime, to: time.DateTime) -> time.DateTime {
-  let unix_from = time.to_unix(from)
-  let unix_to = time.to_unix(to)
+pub fn in_interval(from: birl.Time, to: birl.Time) -> birl.Time {
+  let unix_from = birl.to_unix(from)
+  let unix_to = birl.to_unix(to)
 
   int.random(unix_from, unix_to)
-  |> time.from_unix()
+  |> birl.from_unix()
 }
 
 pub fn symmetric(distance: duration.Duration) {
-  let now = time.now()
+  let now = birl.now()
 
-  let unix_from =
+  int.random(
     now
-    |> time.subtract(distance)
-    |> time.to_unix
-  let unix_to =
+    |> birl.subtract(distance)
+    |> birl.to_unix,
     now
-    |> time.add(distance)
-    |> time.to_unix
-
-  int.random(unix_from, unix_to)
-  |> time.from_unix()
+    |> birl.add(distance)
+    |> birl.to_unix,
+  )
+  |> birl.from_unix()
 }
 
 pub fn past(
   min_distance: duration.Duration,
   max_distance: duration.Duration,
-) -> time.DateTime {
-  let now = time.now()
+) -> birl.Time {
+  let now = birl.now()
 
-  let unix_from =
+  int.random(
     now
-    |> time.subtract(max_distance)
-    |> time.to_unix
-  let unix_to =
+    |> birl.subtract(max_distance)
+    |> birl.to_unix,
     now
-    |> time.subtract(min_distance)
-    |> time.to_unix
-
-  int.random(unix_from, unix_to)
-  |> time.from_unix()
+    |> birl.subtract(min_distance)
+    |> birl.to_unix,
+  )
+  |> birl.from_unix()
 }
 
 pub fn future(
   min_distance: duration.Duration,
   max_distance: duration.Duration,
-) -> time.DateTime {
-  let now = time.now()
+) -> birl.Time {
+  let now = birl.now()
 
-  let unix_from =
+  int.random(
     now
-    |> time.add(min_distance)
-    |> time.to_unix
-  let unix_to =
+    |> birl.add(min_distance)
+    |> birl.to_unix,
     now
-    |> time.add(max_distance)
-    |> time.to_unix
-
-  int.random(unix_from, unix_to)
-  |> time.from_unix()
+    |> birl.add(max_distance)
+    |> birl.to_unix,
+  )
+  |> birl.from_unix()
 }
