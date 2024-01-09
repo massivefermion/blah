@@ -1,23 +1,17 @@
 name = "blah"
-version = "1.0.0"
+version = "1.1.0"
 
 description = "fake data generation for gleam"
 licences = ["Apache-2.0"]
-links = [
-  {title = "Gleam", href = "https://gleam.run"},
-]
-repository = {type = "github", user = "massivefermion", repo = "blah"}
+links = [{ title = "Gleam", href = "https://gleam.run" }]
+repository = { type = "github", user = "massivefermion", repo = "blah" }
 
 gleam = ">= 0.32.0"
-internal_modules = [
-  "blah/en/*",
-  "blah/utils",
-  "blah/locales/*",
-]
+internal_modules = ["blah/en/*", "blah/utils", "blah/locales/*"]
 
 [dependencies]
-birl = "~> 1.0"
-gleam_stdlib = "~> 0.32"
+birl = "~> 1.3"
+gleam_stdlib = "~> 0.34"
 
 [dev-dependencies]
 gleeunit = "~> 1.0"

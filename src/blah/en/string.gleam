@@ -1,10 +1,9 @@
 //// same as `blah/string`
 
-import gleam/int
 import gleam/list
 import gleam/string
 import gleam/string_builder.{type StringBuilder}
-import blah/utils.{get_random_item}
+import blah/utils.{get_random_int, get_random_item}
 
 pub fn alpha(length: Int) {
   alpha_internal(length, string_builder.new())
@@ -45,7 +44,7 @@ pub fn with_pattern(given_pattern: String) {
 }
 
 pub fn roman_numeral(min: Int, max: Int) {
-  int.random(min, max)
+  get_random_int(min, max)
   |> list.repeat("I", _)
   |> string_builder.from_strings
   |> string_builder.replace("IIIII", "V")
@@ -142,7 +141,8 @@ fn alphanumeric_internal(remaining: Int, storage: StringBuilder) -> String {
     False -> {
       let character = get_random_item(characters)
       alphanumeric_internal(
-        remaining - 1,
+        remaining
+        - 1,
         string_builder.append(storage, character),
       )
     }

@@ -1,7 +1,6 @@
-import gleam/int
 import gleam/string
 import blah/locales/fa/address
-import blah/utils.{get_random_item}
+import blah/utils.{get_random_int, get_random_item}
 import blah/fa/string as blah_string
 
 pub fn country() {
@@ -17,7 +16,7 @@ pub fn city() {
 }
 
 pub fn street() {
-  let nonce = int.random(4, 2048)
+  let nonce = get_random_int(4, 2048)
 
   let prefix = get_random_item(address.street_prefixes)
 
@@ -30,7 +29,7 @@ pub fn street() {
   case nonce % 2 {
     0 -> street
 
-    1 -> {
+    _ -> {
       let prefix = get_random_item(address.alley_prefixes)
       let alley = get_random_item(address.streets)
       let alley =
@@ -47,14 +46,14 @@ pub fn postal_code() {
 }
 
 pub fn floor() {
-  let length = int.random(1, 2)
+  let length = get_random_int(1, 2)
   let floor = blah_string.numeric(length)
   ["طبقه‌ی", floor]
   |> string.join(" ")
 }
 
 pub fn unit() {
-  let length = int.random(1, 3)
+  let length = get_random_int(1, 3)
   let unit = blah_string.numeric(length)
   ["واحد", unit]
   |> string.join(" ")

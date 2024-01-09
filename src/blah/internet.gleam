@@ -4,7 +4,7 @@ import gleam/list
 import gleam/string
 import blah/name
 import blah/en/word
-import blah/utils.{get_random_item}
+import blah/utils.{get_random_int, get_random_item}
 import blah/en/string as blah_string
 
 pub type HTTPStatusClass {
@@ -18,7 +18,7 @@ pub type HTTPStatusClass {
 pub fn username(name: String) {
   let adjective = word.adjective()
 
-  let nonce = int.random(4, 2048)
+  let nonce = get_random_int(4, 2048)
   case nonce % 8 {
     0 ->
       [adjective, string.replace(name, " ", "")]
@@ -60,7 +60,7 @@ pub fn username(name: String) {
       ]
       |> string.join("-")
 
-    7 ->
+    _ ->
       [
         adjective,
         string.replace(string.lowercase(name), " ", "_"),
@@ -78,7 +78,7 @@ pub fn email(name) {
 }
 
 pub fn password() {
-  let length = int.random(8, 32)
+  let length = get_random_int(8, 32)
   blah_string.alphanumeric(length)
 }
 
@@ -97,7 +97,7 @@ pub fn domain_name() {
   let adjective = word.adjective()
   let noun = word.noun()
 
-  let nonce = int.random(4, 2048)
+  let nonce = get_random_int(4, 2048)
   let hostname = case nonce % 3 {
     0 ->
       [adjective, noun]
@@ -107,7 +107,7 @@ pub fn domain_name() {
       [adjective, noun]
       |> string.join("-")
 
-    2 ->
+    _ ->
       [adjective, noun]
       |> string.join("_")
   }
@@ -119,7 +119,7 @@ pub fn domain_name() {
 }
 
 pub fn uri() {
-  let nonce = int.random(4, 2048)
+  let nonce = get_random_int(4, 2048)
   let protocol = get_random_item(protocols)
 
   case nonce % 4 {
@@ -137,19 +137,19 @@ pub fn uri() {
         "://",
         domain_name(),
         "/",
-        list.repeat("", int.random(2, 8))
+        list.repeat("", get_random_int(2, 8))
         |> list.map(fn(_) { word.noun() })
         |> string.join("/"),
       ]
       |> string.join("")
 
-    3 ->
+    _ ->
       [
         protocol,
         "://",
         domain_name(),
         "/",
-        list.repeat("", int.random(2, 8))
+        list.repeat("", get_random_int(2, 8))
         |> list.map(fn(_) { word.noun() })
         |> string.join("/"),
         "/",
@@ -160,14 +160,14 @@ pub fn uri() {
 
 pub fn ip_v4() {
   list.repeat("", 4)
-  |> list.map(fn(_) { int.random(0, 256) })
+  |> list.map(fn(_) { int.random(256) })
   |> list.map(int.to_string)
   |> string.join(".")
 }
 
 pub fn ip_v6() {
   list.repeat("", 8)
-  |> list.map(fn(_) { int.random(0, 65_536) })
+  |> list.map(fn(_) { int.random(65_536) })
   |> list.map(fn(field) {
     field
     |> int.to_base16
@@ -178,7 +178,7 @@ pub fn ip_v6() {
 
 pub fn mac() {
   list.repeat("", 6)
-  |> list.map(fn(_) { int.random(0, 256) })
+  |> list.map(fn(_) { int.random(256) })
   |> list.map(fn(field) {
     field
     |> int.to_base16
@@ -191,7 +191,7 @@ pub fn long_hex_color() {
   [
     "#",
     ..list.repeat("", 3)
-    |> list.map(fn(_) { int.random(0, 256) })
+    |> list.map(fn(_) { int.random(256) })
     |> list.map(fn(field) {
       field
       |> int.to_base16
@@ -206,7 +206,7 @@ pub fn short_hex_color() {
   [
     "#",
     ..list.repeat("", 3)
-    |> list.map(fn(_) { int.random(0, 15) })
+    |> list.map(fn(_) { int.random(16) })
     |> list.map(fn(field) {
       field
       |> int.to_base16
@@ -217,11 +217,11 @@ pub fn short_hex_color() {
 }
 
 pub fn hex_color() {
-  let nonce = int.random(4, 2048)
+  let nonce = get_random_int(4, 2048)
 
   case nonce % 2 {
     0 -> long_hex_color()
-    1 -> short_hex_color()
+    _ -> short_hex_color()
   }
 }
 
@@ -231,7 +231,7 @@ pub fn status_code() {
 }
 
 pub fn status_code_in_class(class: HTTPStatusClass) {
-  let [#(_, codes)] =
+  let assert [#(_, codes)] =
     list.filter(status_codes, fn(kv) { pair.first(kv) == class })
 
   get_random_item(codes)

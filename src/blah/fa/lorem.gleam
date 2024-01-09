@@ -1,7 +1,7 @@
-import gleam/int
 import gleam/list
 import gleam/string
 import blah/fa/string as blah_string
+import blah/utils.{get_random_int}
 
 pub fn word() {
   blah_string.pronounceable()
@@ -14,7 +14,7 @@ pub fn words(num: Int) {
 }
 
 pub fn sentence() {
-  let length = int.random(4, 16)
+  let length = get_random_int(4, 16)
   [words(length), "."]
   |> string.join("")
 }
@@ -26,7 +26,7 @@ pub fn sentences(num: Int) {
 }
 
 pub fn paragraph() {
-  let length = int.random(4, 8)
+  let length = get_random_int(4, 8)
   list.repeat("", length)
   |> list.map(fn(_) { sentence() })
   |> string.join(" ")

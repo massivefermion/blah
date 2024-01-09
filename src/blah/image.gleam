@@ -1,5 +1,5 @@
 import gleam/int
-import blah/utils.{get_random_item}
+import blah/utils.{get_random_int, get_random_item}
 
 pub fn avatar(width: Int, height: Int) {
   let category = get_random_item(["portrait", "celebrity", "face", "smile"])
@@ -43,13 +43,21 @@ pub fn fashion(width: Int, height: Int) {
 }
 
 pub fn with_category(category: String, width: Int, height: Int) {
-  "https://loremflickr.com/" <> int.to_string(width) <> "/" <> int.to_string(
-    height,
-  ) <> "/" <> category <> "?lock=" <> int.to_string(int.random(4, 4_294_967_296))
+  "https://loremflickr.com/"
+  <> int.to_string(width)
+  <> "/"
+  <> int.to_string(height)
+  <> "/"
+  <> category
+  <> "?lock="
+  <> int.to_string(get_random_int(4, 4_294_967_296))
 }
 
 pub fn whatever(width: Int, height: Int) {
-  "https://picsum.photos/seed/" <> int.to_string(int.random(4, 4_294_967_296)) <> "/" <> int.to_string(
-    width,
-  ) <> "/" <> int.to_string(height)
+  "https://picsum.photos/seed/"
+  <> int.to_string(get_random_int(4, 4_294_967_296))
+  <> "/"
+  <> int.to_string(width)
+  <> "/"
+  <> int.to_string(height)
 }

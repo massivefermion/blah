@@ -1,10 +1,9 @@
 //// same as `blah/address`
 
-import gleam/int
 import gleam/string
 import blah/name
 import blah/locales/en/address
-import blah/utils.{get_random_item}
+import blah/utils.{get_random_int, get_random_item}
 import blah/en/string as blah_string
 
 pub fn country() {
@@ -38,11 +37,11 @@ pub fn street() {
 }
 
 pub fn zip_code() {
-  let nonce = int.random(4, 2048)
+  let nonce = get_random_int(4, 2048)
 
   case nonce % 2 {
     0 -> blah_string.with_pattern("%d%d%d%d%d-%d%d%d%d")
-    1 -> blah_string.numeric(5)
+    _ -> blah_string.numeric(5)
   }
 }
 

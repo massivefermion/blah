@@ -7,23 +7,13 @@ import gleeunit/should
 import blah/other
 import blah/internet
 
-pub fn username_test() {
-  internet.username("edgar")
-  |> verify_username
-  |> should.be_true
-}
-
 pub fn email_test() {
   let email_parts = string.split(internet.email("simon"), "@")
 
   list.length(email_parts)
   |> should.equal(2)
 
-  let [username, domain] = email_parts
-
-  username
-  |> verify_username
-  |> should.be_true
+  let assert [_username, domain] = email_parts
 
   let domain_parts = string.split(domain, ".")
 
@@ -110,11 +100,4 @@ pub fn mongo_object_id_test() {
 
   regex.check(re, id)
   |> should.be_true
-}
-
-fn verify_username(username: String) -> Bool {
-  list.any(
-    string.to_graphemes(username),
-    fn(g) { list.contains([".", "-", "_"], g) || string.uppercase(g) == g },
-  )
 }

@@ -38,7 +38,7 @@ pub fn generate_fake_person() {
   let assert Ok(id) = object_id.from_string(other.mongo_object_id())
   let name = name.first_name()
   let birthday = time.past(duration.years(18), duration.years(32))
-  let #(age, duration.Year) =
+  let assert #(age, duration.Year) =
     duration.blur(birl.difference(birl.now(), birthday))
 
   Person(

@@ -1,8 +1,7 @@
-import gleam/int
 import gleam/list
 import gleam/string
 import gleam/string_builder.{type StringBuilder}
-import blah/utils.{get_random_item}
+import blah/utils.{get_random_int, get_random_item}
 
 pub fn alpha(length: Int) {
   alpha_internal(length, string_builder.new())
@@ -30,19 +29,20 @@ pub fn with_pattern(given_pattern: String) {
 }
 
 pub fn pronounceable() {
-  let nonce = int.random(4, 2048)
-  let length = int.random(2, 4) * 2
+  let nonce = get_random_int(4, 2048)
+  let length = { get_random_int(2, 4) } * 2
 
   case nonce % 2 {
     0 -> {
       let first = get_random_item(starting_vowels)
       let second = get_random_item(consonants)
       pronounceable_internal(
-        length - 2,
+        length
+        - 2,
         string_builder.from_strings([first, second]),
       )
     }
-    1 -> pronounceable_internal(length, string_builder.new())
+    _ -> pronounceable_internal(length, string_builder.new())
   }
 }
 
@@ -78,7 +78,7 @@ fn pronounceable_internal(remaining: Int, storage: StringBuilder) -> String {
     0 -> string_builder.to_string(storage)
 
     _ -> {
-      let nonce = int.random(4, 2048)
+      let nonce = get_random_int(4, 2048)
       let letters = case nonce % 2 {
         0 -> {
           let first = get_random_item(vowels)
@@ -86,7 +86,7 @@ fn pronounceable_internal(remaining: Int, storage: StringBuilder) -> String {
           [first, second]
           |> list.map(string_builder.from_string)
         }
-        1 -> {
+        _ -> {
           let first = get_random_item(consonants)
           let second = get_random_item(vowels)
           [first, second]
@@ -94,7 +94,8 @@ fn pronounceable_internal(remaining: Int, storage: StringBuilder) -> String {
         }
       }
       pronounceable_internal(
-        remaining - 2,
+        remaining
+        - 2,
         string_builder.concat([storage, ..letters]),
       )
     }
@@ -130,7 +131,8 @@ fn alphanumeric_internal(remaining: Int, storage: StringBuilder) -> String {
     False -> {
       let character = get_random_item(characters)
       alphanumeric_internal(
-        remaining - 1,
+        remaining
+        - 1,
         string_builder.append(storage, character),
       )
     }

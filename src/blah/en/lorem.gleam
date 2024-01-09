@@ -1,10 +1,9 @@
 //// same as `blah/lorem`
 
-import gleam/int
 import gleam/list
 import gleam/string
 import blah/locales/en/lorem
-import blah/utils.{get_random_item}
+import blah/utils.{get_random_int, get_random_item}
 
 pub fn word() {
   get_random_item(lorem.words)
@@ -23,7 +22,7 @@ pub fn slug(num: Int) {
 }
 
 pub fn sentence() {
-  let length = int.random(4, 16)
+  let length = get_random_int(4, 16)
   [string.capitalise(words(length)), "."]
   |> string.join("")
 }
@@ -35,7 +34,7 @@ pub fn sentences(num: Int) {
 }
 
 pub fn paragraph() {
-  let length = int.random(4, 8)
+  let length = get_random_int(4, 8)
   list.repeat("", length)
   |> list.map(fn(_) { sentence() })
   |> string.join(" ")
