@@ -86,7 +86,7 @@ pub fn passphrase() {
   [
     word.adjective(),
     name.first_name()
-    |> string.lowercase(),
+      |> string.lowercase(),
     word.verb(),
     word.adverb(),
   ]
@@ -138,8 +138,8 @@ pub fn uri() {
         domain_name(),
         "/",
         list.repeat("", get_random_int(2, 8))
-        |> list.map(fn(_) { word.noun() })
-        |> string.join("/"),
+          |> list.map(fn(_) { word.noun() })
+          |> string.join("/"),
       ]
       |> string.join("")
 
@@ -150,8 +150,8 @@ pub fn uri() {
         domain_name(),
         "/",
         list.repeat("", get_random_int(2, 8))
-        |> list.map(fn(_) { word.noun() })
-        |> string.join("/"),
+          |> list.map(fn(_) { word.noun() })
+          |> string.join("/"),
         "/",
       ]
       |> string.join("")

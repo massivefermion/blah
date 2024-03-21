@@ -37,8 +37,7 @@ pub fn pronounceable() {
       let first = get_random_item(starting_vowels)
       let second = get_random_item(consonants)
       pronounceable_internal(
-        length
-        - 2,
+        length - 2,
         string_builder.from_strings([first, second]),
       )
     }
@@ -94,8 +93,7 @@ fn pronounceable_internal(remaining: Int, storage: StringBuilder) -> String {
         }
       }
       pronounceable_internal(
-        remaining
-        - 2,
+        remaining - 2,
         string_builder.concat([storage, ..letters]),
       )
     }
@@ -131,8 +129,7 @@ fn alphanumeric_internal(remaining: Int, storage: StringBuilder) -> String {
     False -> {
       let character = get_random_item(characters)
       alphanumeric_internal(
-        remaining
-        - 1,
+        remaining - 1,
         string_builder.append(storage, character),
       )
     }

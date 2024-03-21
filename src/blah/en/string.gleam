@@ -141,8 +141,7 @@ fn alphanumeric_internal(remaining: Int, storage: StringBuilder) -> String {
     False -> {
       let character = get_random_item(characters)
       alphanumeric_internal(
-        remaining
-        - 1,
+        remaining - 1,
         string_builder.append(storage, character),
       )
     }
