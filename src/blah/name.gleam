@@ -3,7 +3,7 @@
 import blah/en/name
 
 pub fn first_name() {
-  name.female_first_name()
+  name.first_name()
 }
 
 pub fn female_first_name() {
