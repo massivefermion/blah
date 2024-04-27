@@ -107,7 +107,7 @@ pub const alpha3_country_codes = [
   "IND", "ALA", "AZE", "IRL", "IDN", "UKR", "QAT", "MOZ",
 ]
 
-pub const states = [
+pub const departments = [
   "Ain", "Aisne", "Allier", "Alpes-de-Haute-Provence", "Hautes-Alpes",
   "Alpes-Maritimes", "Ardèche", "Ardennes", "Ariège", "Aube", "Aude",
   "Aveyron", "Bouches-du-Rhône", "Calvados", "Cantal", "Charente",
@@ -129,7 +129,7 @@ pub const states = [
   "La Réunion", "Mayotte",
 ]
 
-pub const state_codes = [
+pub const department_numbers = [
   "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
   "14", "15", "16", "17", "18", "19", "2A", "2B", "21", "22", "23", "24", "25",
   "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38",
