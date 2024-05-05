@@ -243,7 +243,7 @@ pub const streets = [
   "grand rue", "grande rue", "grandes rues", "grands ensembles", "grille",
   "grimpette", "groupe", "groupement", "groupes", "halle", "halles", "hameau",
   "hameaux", "haut chemin", "hauts chemins", "hippodrome", "hlm", "île",
-  "immeuble", "immeubles", "impasse", "impasses", "jardin", "jardins", "jetee",
+  "immeuble", "immeubles", "impasse", "impasses", "jardin", "jardins", "jetée",
   "jetees", "levée", "lieu dit", "lotissement", "lotissements", "mail",
   "maison forestière", "manoir", "marche", "marches", "mas", "métro",
   "montée", "montees", "moulin", "moulins", "musée", "nouvelle route",
