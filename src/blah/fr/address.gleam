@@ -4,6 +4,7 @@ import gleam/int
 import gleam/string
 import blah/name
 import blah/locales/fr/address
+import blah/locales/fr/address.{type Department}
 import blah/utils.{get_random_int, get_random_item}
 import blah/string as blah_string
 
@@ -20,6 +21,7 @@ pub fn alpha3_country_code() {
 }
 
 pub fn departement() {
+pub fn departement() -> Department {
   get_random_item(address.departments)
 }
 
