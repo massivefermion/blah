@@ -1,7 +1,7 @@
 import gleam/int
 import gleam/string
 import blah/fr/name
-import blah/locales/fr/address.{type Department}
+import blah/locales/fr/address.{type City, type Department}
 import blah/utils.{get_random_int, get_random_item}
 import blah/string as blah_string
 
@@ -13,7 +13,7 @@ pub fn departement() -> Department {
   get_random_item(address.departments)
 }
 
-pub fn city() -> String {
+pub fn city() -> City {
   get_random_item(address.cities)
 }
 
@@ -27,12 +27,6 @@ pub fn street() -> String {
   |> string.join(" ")
 }
 
-pub fn postal_code() -> String {
-  get_random_int(1000, 98_890)
-  |> int.to_string()
-  |> string.pad_left(to: 5, with: "0")
-}
-
 pub fn direction() -> String {
   get_random_item(address.directions)
 }
@@ -42,7 +36,9 @@ pub fn direction_code() -> String {
 }
 
 pub fn full_address() -> String {
-  [blah_string.with_pattern("%d%d"), street(), postal_code(), city()]
+  let city = city()
+  let postal_code = get_random_item(city.postal_codes)
+  [blah_string.with_pattern("%d%d"), street(), postal_code, city.name]
   |> string.join(" ")
 }
 
