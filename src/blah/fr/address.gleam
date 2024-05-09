@@ -1,9 +1,14 @@
-import gleam/int
 import gleam/string
 import blah/fr/name
-import blah/locales/fr/address.{type City, type Department}
+import blah/locales/fr/address
 import blah/utils.{get_random_int, get_random_item}
 import blah/string as blah_string
+
+pub type Department =
+  address.Department
+
+pub type City =
+  address.City
 
 pub fn country() -> String {
   get_random_item(address.countries)
