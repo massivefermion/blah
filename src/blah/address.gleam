@@ -45,7 +45,7 @@ pub fn direction_code() {
 pub fn full_address() {
   address.full_address()
 }
-  
+
 pub fn time_zone() {
   address.time_zone()
 }
