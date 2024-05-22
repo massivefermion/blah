@@ -1,8 +1,9 @@
 import gleam/list
 import gleam/string
-import blah/name
 import gleeunit/should
+
 import blah/locales/en/name as name_repo
+import blah/name
 
 pub fn first_name_test() {
   list.contains(name_repo.first_names, name.first_name())

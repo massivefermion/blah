@@ -1,11 +1,12 @@
-import gleam/uri
 import gleam/int
 import gleam/list
 import gleam/regex
 import gleam/string
+import gleam/uri
 import gleeunit/should
-import blah/other
+
 import blah/internet
+import blah/other
 
 pub fn email_test() {
   let email_parts = string.split(internet.email("simon"), "@")

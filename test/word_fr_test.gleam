@@ -1,6 +1,7 @@
 import gleam/list
-import blah/fr/word
 import gleeunit/should
+
+import blah/fr/word
 import blah/locales/fr/word as word_repo
 
 pub fn verb_test() {

@@ -1,6 +1,7 @@
 import gleam/list
 import gleam/string
 import gleam/string_builder.{type StringBuilder}
+
 import blah/utils.{get_random_int, get_random_item}
 
 pub fn alpha(length: Int) {

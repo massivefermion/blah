@@ -1,7 +1,8 @@
+import gleam/float
 import gleam/int
 import gleam/list
-import gleam/float
 import gleam/string
+
 import blah/en/other
 import blah/utils.{get_random_int, get_random_item}
 

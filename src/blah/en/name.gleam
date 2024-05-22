@@ -1,6 +1,7 @@
 //// same as `blah/name`
 
 import gleam/string
+
 import blah/locales/en/name
 import blah/utils.{get_random_item}
 

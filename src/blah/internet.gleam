@@ -1,11 +1,12 @@
 import gleam/int
-import gleam/pair
 import gleam/list
+import gleam/pair
 import gleam/string
-import blah/name
-import blah/en/word
-import blah/utils.{get_random_int, get_random_item}
+
 import blah/en/string as blah_string
+import blah/en/word
+import blah/name
+import blah/utils.{get_random_int, get_random_item}
 
 pub type HTTPStatusClass {
   Informational

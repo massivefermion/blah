@@ -30,7 +30,7 @@ pub const currencies = [
   #("Denmark Krone", "DKK", "kr"),
   #("Dominican Republic Peso", "DOP", "RD$"),
   #("Egypt Pound", "EGP", "£"),
-  #("Euro Member Countries", "EUR", "€"),
+  #("Eurozone Euro", "EUR", "€"),
   #("Fiji Dollar", "FJD", "$"),
   #("Falkland Islands (Malvinas) Pound", "FKP", "£"),
   #("United Kingdom Pound", "GBP", "£"),

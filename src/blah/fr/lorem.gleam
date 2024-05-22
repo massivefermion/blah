@@ -2,6 +2,7 @@
 
 import gleam/list
 import gleam/string
+
 import blah/locales/fr/lorem
 import blah/utils.{get_random_int, get_random_item}
 

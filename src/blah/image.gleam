@@ -1,4 +1,5 @@
 import gleam/int
+
 import blah/utils.{get_random_int, get_random_item}
 
 pub fn avatar(width: Int, height: Int) {

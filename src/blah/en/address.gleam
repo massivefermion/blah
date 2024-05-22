@@ -1,10 +1,11 @@
 //// same as `blah/address`
 
 import gleam/string
-import blah/name
-import blah/locales/en/address
-import blah/utils.{get_random_int, get_random_item}
+
 import blah/en/string as blah_string
+import blah/locales/en/address
+import blah/name
+import blah/utils.{get_random_int, get_random_item}
 
 pub fn country() {
   get_random_item(address.countries)

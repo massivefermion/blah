@@ -1,5 +1,6 @@
 import gleam/list
 import gleam/string
+
 import blah/fa/string as blah_string
 import blah/utils.{get_random_int}
 

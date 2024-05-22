@@ -1,8 +1,9 @@
 import gleam/string
+
 import blah/fr/name
 import blah/locales/fr/address
-import blah/utils.{get_random_int, get_random_item}
 import blah/string as blah_string
+import blah/utils.{get_random_int, get_random_item}
 
 pub type Department =
   address.Department

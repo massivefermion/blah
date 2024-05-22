@@ -1,7 +1,8 @@
 import gleam/string
+
+import blah/fa/string as blah_string
 import blah/locales/fa/address
 import blah/utils.{get_random_int, get_random_item}
-import blah/fa/string as blah_string
 
 pub fn country() {
   get_random_item(address.countries)

@@ -1,7 +1,8 @@
 import gleam/list
-import blah/word
 import gleeunit/should
+
 import blah/locales/en/word as word_repo
+import blah/word
 
 pub fn verb_test() {
   list.contains(word_repo.verbs, word.verb())

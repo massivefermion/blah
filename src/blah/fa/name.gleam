@@ -1,4 +1,5 @@
 import gleam/string
+
 import blah/locales/fa/name
 import blah/utils.{get_random_item}
 
