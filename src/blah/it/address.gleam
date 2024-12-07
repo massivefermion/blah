@@ -21,7 +21,7 @@ pub fn province() {
 
 pub fn street() {
   let street = get_random_item(address.streets)
-  // most of Italian street names starts with "rue"        
+  // most of Italian street names starts with "via"        
   ["Via", street]
   |> string.join(" ")
 }
