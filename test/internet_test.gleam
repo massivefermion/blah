@@ -1,6 +1,6 @@
 import gleam/int
 import gleam/list
-import gleam/regex
+import gleam/regexp
 import gleam/string
 import gleam/uri
 import gleeunit/should
@@ -79,26 +79,26 @@ pub fn mac_test() {
 pub fn long_hex_color_test() {
   let color = internet.long_hex_color()
 
-  let assert Ok(re) = regex.from_string("^#[0-9a-fA-F]{6}$")
+  let assert Ok(re) = regexp.from_string("^#[0-9a-fA-F]{6}$")
 
-  regex.check(re, color)
+  regexp.check(re, color)
   |> should.be_true
 }
 
 pub fn short_hex_color_test() {
   let color = internet.short_hex_color()
 
-  let assert Ok(re) = regex.from_string("^#[0-9a-fA-F]{3}$")
+  let assert Ok(re) = regexp.from_string("^#[0-9a-fA-F]{3}$")
 
-  regex.check(re, color)
+  regexp.check(re, color)
   |> should.be_true
 }
 
 pub fn mongo_object_id_test() {
   let id = other.mongo_object_id()
 
-  let assert Ok(re) = regex.from_string("^[0-9a-fA-F]{24}$")
+  let assert Ok(re) = regexp.from_string("^[0-9a-fA-F]{24}$")
 
-  regex.check(re, id)
+  regexp.check(re, id)
   |> should.be_true
 }

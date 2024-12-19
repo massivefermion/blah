@@ -2,28 +2,28 @@
 
 import gleam/list
 import gleam/string
-import gleam/string_builder.{type StringBuilder}
+import gleam/string_tree.{type StringTree}
 
 import blah/utils.{get_random_int, get_random_item}
 
 pub fn alpha(length: Int) {
-  alpha_internal(length, string_builder.new())
+  alpha_internal(length, string_tree.new())
 }
 
 pub fn lower_alpha(length: Int) {
-  lower_internal(length, string_builder.new())
+  lower_internal(length, string_tree.new())
 }
 
 pub fn upper_alpha(length: Int) {
-  upper_internal(length, string_builder.new())
+  upper_internal(length, string_tree.new())
 }
 
 pub fn numeric(length: Int) {
-  numeric_internal(length, string_builder.new())
+  numeric_internal(length, string_tree.new())
 }
 
 pub fn alphanumeric(length: Int) {
-  alphanumeric_internal(length, string_builder.new())
+  alphanumeric_internal(length, string_tree.new())
 }
 
 /// you can use the below codes to specify your desired pattern:
@@ -41,26 +41,26 @@ pub fn alphanumeric(length: Int) {
 ///     %u - uppercase letters
 ///
 pub fn with_pattern(given_pattern: String) {
-  with_pattern_internal(given_pattern, string_builder.new())
+  with_pattern_internal(given_pattern, string_tree.new())
 }
 
 pub fn roman_numeral(min: Int, max: Int) {
   get_random_int(min, max)
   |> list.repeat("I", _)
-  |> string_builder.from_strings
-  |> string_builder.replace("IIIII", "V")
-  |> string_builder.replace("VV", "X")
-  |> string_builder.replace("XXXXX", "L")
-  |> string_builder.replace("LL", "C")
-  |> string_builder.replace("CCCCC", "D")
-  |> string_builder.replace("DD", "M")
-  |> string_builder.replace("DCCCC", "CM")
-  |> string_builder.replace("CCCC", "CD")
-  |> string_builder.replace("LXXXX", "XC")
-  |> string_builder.replace("XXXX", "XL")
-  |> string_builder.replace("VIIII", "IX")
-  |> string_builder.replace("IIII", "IV")
-  |> string_builder.to_string
+  |> string_tree.from_strings
+  |> string_tree.replace("IIIII", "V")
+  |> string_tree.replace("VV", "X")
+  |> string_tree.replace("XXXXX", "L")
+  |> string_tree.replace("LL", "C")
+  |> string_tree.replace("CCCCC", "D")
+  |> string_tree.replace("DD", "M")
+  |> string_tree.replace("DCCCC", "CM")
+  |> string_tree.replace("CCCC", "CD")
+  |> string_tree.replace("LXXXX", "XC")
+  |> string_tree.replace("XXXX", "XL")
+  |> string_tree.replace("VIIII", "IX")
+  |> string_tree.replace("IIII", "IV")
+  |> string_tree.to_string
 }
 
 const lower_letters = [
@@ -91,68 +91,65 @@ const characters = [
   "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
 ]
 
-fn alpha_internal(remaining: Int, storage: StringBuilder) -> String {
+fn alpha_internal(remaining: Int, storage: StringTree) -> String {
   case remaining == 0 {
-    True -> string_builder.to_string(storage)
+    True -> string_tree.to_string(storage)
 
     False -> {
       let letter = get_random_item(letters)
-      alpha_internal(remaining - 1, string_builder.append(storage, letter))
+      alpha_internal(remaining - 1, string_tree.append(storage, letter))
     }
   }
 }
 
-fn lower_internal(remaining: Int, storage: StringBuilder) -> String {
+fn lower_internal(remaining: Int, storage: StringTree) -> String {
   case remaining == 0 {
-    True -> string_builder.to_string(storage)
+    True -> string_tree.to_string(storage)
 
     False -> {
       let letter = get_random_item(lower_letters)
-      lower_internal(remaining - 1, string_builder.append(storage, letter))
+      lower_internal(remaining - 1, string_tree.append(storage, letter))
     }
   }
 }
 
-fn upper_internal(remaining: Int, storage: StringBuilder) -> String {
+fn upper_internal(remaining: Int, storage: StringTree) -> String {
   case remaining == 0 {
-    True -> string_builder.to_string(storage)
+    True -> string_tree.to_string(storage)
 
     False -> {
       let letter = get_random_item(upper_letters)
-      upper_internal(remaining - 1, string_builder.append(storage, letter))
+      upper_internal(remaining - 1, string_tree.append(storage, letter))
     }
   }
 }
 
-fn numeric_internal(remaining: Int, storage: StringBuilder) -> String {
+fn numeric_internal(remaining: Int, storage: StringTree) -> String {
   case remaining == 0 {
-    True -> string_builder.to_string(storage)
+    True -> string_tree.to_string(storage)
 
     False -> {
       let digit = get_random_item(digits)
-      numeric_internal(remaining - 1, string_builder.append(storage, digit))
+      numeric_internal(remaining - 1, string_tree.append(storage, digit))
     }
   }
 }
 
-fn alphanumeric_internal(remaining: Int, storage: StringBuilder) -> String {
+fn alphanumeric_internal(remaining: Int, storage: StringTree) -> String {
   case remaining == 0 {
-    True -> string_builder.to_string(storage)
+    True -> string_tree.to_string(storage)
 
     False -> {
       let character = get_random_item(characters)
       alphanumeric_internal(
         remaining - 1,
-        string_builder.append(storage, character),
+        string_tree.append(storage, character),
       )
     }
   }
 }
 
-fn with_pattern_internal(
-  given_pattern: String,
-  storage: StringBuilder,
-) -> String {
+fn with_pattern_internal(given_pattern: String, storage: StringTree) -> String {
   case string.first(given_pattern) {
     Ok("%") -> {
       let to_append = case string.slice(given_pattern, 0, 2) {
@@ -165,17 +162,17 @@ fn with_pattern_internal(
         characters -> characters
       }
       with_pattern_internal(
-        string.drop_left(given_pattern, 2),
-        string_builder.append(storage, to_append),
+        string.drop_start(given_pattern, 2),
+        string_tree.append(storage, to_append),
       )
     }
 
     Ok(to_append) ->
       with_pattern_internal(
-        string.drop_left(given_pattern, 1),
-        string_builder.append(storage, to_append),
+        string.drop_start(given_pattern, 1),
+        string_tree.append(storage, to_append),
       )
 
-    Error(Nil) -> string_builder.to_string(storage)
+    Error(Nil) -> string_tree.to_string(storage)
   }
 }

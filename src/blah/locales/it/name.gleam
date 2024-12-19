@@ -80,5 +80,5 @@ pub const last_names = [
 ]
 
 pub fn first_names() {
-  list.concat([male_first_names, female_first_names])
+  list.flatten([male_first_names, female_first_names])
 }

@@ -83,12 +83,12 @@ pub const interjections = [
 ]
 
 pub const conjunctions = [
-  "affinché", "altrimenti", "anche se", "ancora che", "appena", "benché",
-  "così", "come", "come se", "che", "cosa che", "da quando", "dato che",
-  "di modo che", "e", "finché", "in quanto", "in modo che", "ma", "mentre",
-  "né", "nonostante", "oppure", "o", "oltre a", "perché", "piuttosto che",
-  "quando", "se", "sebbene", "siccome", "sino a", "tuttavia", "unicamente",
-  "vecchio che", "verso", "quando", "sebbene", "sino a", "senza che", "quindi",
+  "affinché", "altrimenti", "anche se", "ancora che", "appena", "benché", "così",
+  "come", "come se", "che", "cosa che", "da quando", "dato che", "di modo che",
+  "e", "finché", "in quanto", "in modo che", "ma", "mentre", "né", "nonostante",
+  "oppure", "o", "oltre a", "perché", "piuttosto che", "quando", "se", "sebbene",
+  "siccome", "sino a", "tuttavia", "unicamente", "vecchio che", "verso",
+  "quando", "sebbene", "sino a", "senza che", "quindi",
 ]
 
 pub const adverbs = [
